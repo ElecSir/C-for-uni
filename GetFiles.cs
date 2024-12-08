@@ -82,7 +82,12 @@ class Program
                 int present = student.Value.present; // Количество присутствий
                 int total = student.Value.total; // Общее количество записей
                 double attendancePercentage = total > 0 ? (double)present / total * 100 : 0; // Вычисляем процент посещаемости
-
+                // if (total > 0)
+                //{
+                    //double attendancePercentage;
+                    // attendancePercentage = present/total * 100;
+                //}
+                
                 // Записываем в файл
                 writer.WriteLine($"Студент: {studentName}, Процент посещаемости: {attendancePercentage:F2}%");
             }
