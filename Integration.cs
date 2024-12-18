@@ -43,6 +43,17 @@ namespace TrapezoidalIntegration
             // Определяем функцию для интегрирования
             Func<double, double> function = x => 5 * Math.Sin(5.0 / 6.0 * x);
 
+            /*
+            double MyFunction(double x)
+            {
+                return 5 * Math.Sin(5.0 / 6.0 * x);
+            }
+
+            // Usage
+            Func<double, double> function = MyFunction;
+
+            */
+
             // Рассчитываем интеграл
             double result = integrator.Integrate(function, a, b, n);
             Console.WriteLine($"Результат численного интегрирования: {result}");
