@@ -1,7 +1,25 @@
-В этом проекте создайте два класса, Vector и Geometry, в пространстве имен Geometry.
+Описание: Эта система помогает пользователям управлять сво-ими личными задачами и делами. Она позволяет добавлять, ре-дактировать и отслеживать выполнение задач.
+Классы и их поля:
+•	Task
+o	String TaskID: Уникальный идентификатор задачи.
+o	String Description: Описание задачи.
+o	Boolean IsCompleted: Статус выполнения задачи.
+o	DateTime DueDate: Срок выполнения задачи.
+o	String Priority: Приоритет задачи (например, "вы-сокий", "средний", "низкий").
+•	TaskList
+o	String ListID: Уникальный идентификатор списка задач.
+o	String Title: Название списка задач.
+o	List<Task> Tasks: Список задач.
+o	DateTime CreatedDate: Дата создания списка.
+•	TaskManager
+o	List<TaskList> TaskLists: Список всех списков за-дач.
+o	String ManagerName: Имя менеджера задач.
+o	String ContactInfo: Контактная информация мене-джера.
+o	Int TotalTasks: Общее количество задач.
+Методы:
+•	TaskManager.AddTask(Task task, TaskList list)
+•	TaskManager.EditTask(Task task)
+•	TaskManager.RemoveTask(Task task)
+•	TaskManager.GetPendingTasks()
+•	TaskManager.GetCompletedTasks()
 
-В классе Vector должно быть два публичных поля, X и Y, типа double.
-
-В классе Geometry должно быть два статических метода: GetLength, который возвращает длину переданного вектора, и Add, который возвращает сумму двух переданных векторов.
-
-Оба класса разместите в одном файле. Вообще-то так обычно делать не стоит, но так удобнее для нашей автоматической проверки выполнения задания.
