@@ -23,3 +23,28 @@ o	Int TotalTasks: Общее количество задач.
 •	TaskManager.GetPendingTasks()
 •	TaskManager.GetCompletedTasks()
 
+13. Система управления подписками
+Описание: Эта система позволяет управлять подписками на раз-личные услуги или контент. Пользователи могут подписываться, отменять подписки и отслеживать свои подписки.
+Классы и их поля:
+•	Subscription
+o	String SubscriptionID: Уникальный идентификатор подписки.
+o	String ServiceName: Название услуги.
+o	DateTime StartDate: Дата начала подписки.
+o	DateTime EndDate: Дата окончания подписки.
+o	Double Price: Цена подписки.
+•	User
+o	String UserID: Уникальный идентификатор пользо-вателя.
+o	String Name: Имя пользователя.
+o	String Email: Электронная почта пользователя.
+o	List<Subscription> Subscriptions: Список подписок пользователя.
+•	SubscriptionManager
+o	List<User> Users: Список всех пользователей.
+o	List<Subscription> AllSubscriptions: Список всех подписок.
+o	String ManagerName: Имя менеджера подписок.
+o	String ContactInfo: Контактная информация мене-джера.
+Методы:
+•	SubscriptionManager.AddSubscription(User user, Subscrip-tion subscription)
+•	SubscriptionManager.CancelSubscription(User user, Sub-scription subscription)
+•	SubscriptionManager.GetActiveSubscriptions(User user)
+•	SubscriptionManager.GetExpiredSubscriptions(User user)
+•	SubscriptionManager.GetSubscriptionDetails(Subscription subscription)
