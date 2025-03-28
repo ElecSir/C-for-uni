@@ -48,3 +48,26 @@ o	String ContactInfo: Контактная информация мене-дже�
 •	SubscriptionManager.GetActiveSubscriptions(User user)
 •	SubscriptionManager.GetExpiredSubscriptions(User user)
 •	SubscriptionManager.GetSubscriptionDetails(Subscription subscription)
+
+
+SubscriptionManager manager = new SubscriptionManager("John Doe", "john.doe@example.com");
+
+            // Создание пользователя
+            User user = new User("U1", "Alice", "alice@example.com");
+
+            // Создание подписок
+            Subscription sub1 = new Subscription("S1", "Netflix", new DateTime(2025, 1, 1), new DateTime(2025, 12, 31), 9.99);
+            Subscription sub2 = new Subscription("S2", "Spotify", new DateTime(2025, 2, 1), new DateTime(2025, 2, 28), 4.99);
+
+            // Добавление подписок пользователю
+            manager.AddSubscription(user, sub1);
+            manager.AddSubscription(user, sub2);
+
+            // Вывод активных подписок
+            manager.GetActiveSubscriptions(user);
+
+            // Отмена подписки
+            manager.CancelSubscription(user, sub2);
+
+            // Вывод истекших подписок
+            manager.GetExpiredSubscriptions(user);
