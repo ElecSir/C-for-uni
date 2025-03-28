@@ -71,3 +71,232 @@ SubscriptionManager manager = new SubscriptionManager("John Doe", "john.doe@exam
 
             // Вывод истекших подписок
             manager.GetExpiredSubscriptions(user);
+
+Вот реализация консольного интерфейса для взаимодействия с системой управления подписками. Пользователь может создавать пользователей, подписки, добавлять/удалять подписки, просматривать активные и истекшие подписки.
+
+```csharp
+using System;
+using System.Collections.Generic;
+
+namespace SubscriptionManagementSystem
+{
+    // Классы Subscription, User и SubscriptionManager остаются без изменений
+    // (такими же, как в предыдущем примере)
+
+    class Program
+    {
+        static SubscriptionManager manager = new SubscriptionManager("Admin", "admin@example.com");
+        static List<User> users = new List<User>();
+        static List<Subscription> allSubscriptions = new List<Subscription>();
+
+        static void Main(string[] args)
+        {
+            bool exit = false;
+            while (!exit)
+            {
+                Console.Clear();
+                Console.WriteLine("=== Система управления подписками ===");
+                Console.WriteLine("1. Создать пользователя");
+                Console.WriteLine("2. Создать подписку");
+                Console.WriteLine("3. Добавить подписку пользователю");
+                Console.WriteLine("4. Отменить подписку");
+                Console.WriteLine("5. Показать активные подписки пользователя");
+                Console.WriteLine("6. Показать истекшие подписки пользователя");
+                Console.WriteLine("7. Показать всех пользователей");
+                Console.WriteLine("8. Показать все подписки");
+                Console.WriteLine("0. Выход");
+                Console.Write("Выберите действие: ");
+
+                var choice = Console.ReadLine();
+                switch (choice)
+                {
+                    case "1":
+                        CreateUser();
+                        break;
+                    case "2":
+                        CreateSubscription();
+                        break;
+                    case "3":
+                        AddSubscriptionToUser();
+                        break;
+                    case "4":
+                        CancelSubscription();
+                        break;
+                    case "5":
+                        ShowActiveSubscriptions();
+                        break;
+                    case "6":
+                        ShowExpiredSubscriptions();
+                        break;
+                    case "7":
+                        ShowAllUsers();
+                        break;
+                    case "8":
+                        ShowAllSubscriptions();
+                        break;
+                    case "0":
+                        exit = true;
+                        break;
+                    default:
+                        Console.WriteLine("Неверный выбор!");
+                        Console.ReadKey();
+                        break;
+                }
+            }
+        }
+
+        static void CreateUser()
+        {
+            Console.Write("Введите ID пользователя: ");
+            var id = Console.ReadLine();
+            Console.Write("Введите имя пользователя: ");
+            var name = Console.ReadLine();
+            Console.Write("Введите email пользователя: ");
+            var email = Console.ReadLine();
+
+            var user = new User(id, name, email);
+            users.Add(user);
+            Console.WriteLine("Пользователь успешно создан!");
+            Console.ReadKey();
+        }
+
+        static void CreateSubscription()
+        {
+            Console.Write("Введите ID подписки: ");
+            var id = Console.ReadLine();
+            Console.Write("Введите название сервиса: ");
+            var service = Console.ReadLine();
+            Console.Write("Введите дату начала (гггг-мм-дд): ");
+            var startDate = DateTime.Parse(Console.ReadLine());
+            Console.Write("Введите дату окончания (гггг-мм-дд): ");
+            var endDate = DateTime.Parse(Console.ReadLine());
+            Console.Write("Введите цену: ");
+            var price = double.Parse(Console.ReadLine());
+
+            var sub = new Subscription(id, service, startDate, endDate, price);
+            allSubscriptions.Add(sub);
+            Console.WriteLine("Подписка успешно создана!");
+            Console.ReadKey();
+        }
+
+        static void AddSubscriptionToUser()
+        {
+            ShowAllUsers();
+            Console.Write("Выберите номер пользователя: ");
+            int userIndex = int.Parse(Console.ReadLine()) - 1;
+
+            ShowAllSubscriptions();
+            Console.Write("Выберите номер подписки: ");
+            int subIndex = int.Parse(Console.ReadLine()) - 1;
+
+            manager.AddSubscription(users[userIndex], allSubscriptions[subIndex]);
+            Console.WriteLine("Подписка успешно добавлена пользователю!");
+            Console.ReadKey();
+        }
+
+        static void CancelSubscription()
+        {
+            ShowAllUsers();
+            Console.Write("Выберите номер пользователя: ");
+            int userIndex = int.Parse(Console.ReadLine()) - 1;
+
+            var user = users[userIndex];
+            if (user.Subscriptions.Count == 0)
+            {
+                Console.WriteLine("У пользователя нет подписок!");
+                Console.ReadKey();
+                return;
+            }
+
+            Console.WriteLine("Подписки пользователя:");
+            for (int i = 0; i < user.Subscriptions.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {user.Subscriptions[i].ServiceName}");
+            }
+
+            Console.Write("Выберите номер подписки для отмены: ");
+            int subIndex = int.Parse(Console.ReadLine()) - 1;
+
+            manager.CancelSubscription(user, user.Subscriptions[subIndex]);
+            Console.WriteLine("Подписка успешно отменена!");
+            Console.ReadKey();
+        }
+
+        static void ShowActiveSubscriptions()
+        {
+            ShowAllUsers();
+            Console.Write("Выберите номер пользователя: ");
+            int userIndex = int.Parse(Console.ReadLine()) - 1;
+
+            Console.WriteLine("\nАктивные подписки:");
+            manager.GetActiveSubscriptions(users[userIndex]);
+            Console.ReadKey();
+        }
+
+        static void ShowExpiredSubscriptions()
+        {
+            ShowAllUsers();
+            Console.Write("Выберите номер пользователя: ");
+            int userIndex = int.Parse(Console.ReadLine()) - 1;
+
+            Console.WriteLine("\nИстекшие подписки:");
+            manager.GetExpiredSubscriptions(users[userIndex]);
+            Console.ReadKey();
+        }
+
+        static void ShowAllUsers()
+        {
+            Console.WriteLine("\nСписок пользователей:");
+            for (int i = 0; i < users.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {users[i].Name} (ID: {users[i].UserID})");
+            }
+        }
+
+        static void ShowAllSubscriptions()
+        {
+            Console.WriteLine("\nСписок всех подписок:");
+            for (int i = 0; i < allSubscriptions.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {allSubscriptions[i].ServiceName} (ID: {allSubscriptions[i].SubscriptionID})");
+            }
+        }
+    }
+}
+```
+
+### Особенности интерфейса:
+1. **Главное меню** с 8 пунктами управления системой
+2. **Создание пользователей** с указанием ID, имени и email
+3. **Создание подписок** с указанием всех параметров
+4. **Добавление подписок** пользователям (с выбором из списка)
+5. **Отмена подписок** (с выбором из списка подписок пользователя)
+6. **Просмотр активных/истекших** подписок для конкретного пользователя
+7. **Просмотр всех** пользователей и подписок в системе
+
+### Как использовать:
+1. Сначала создайте несколько пользователей (пункт 1)
+2. Создайте несколько подписок (пункт 2)
+3. Добавьте подписки пользователям (пункт 3)
+4. Проверьте работу других функций (просмотр, отмена подписок)
+
+### Пример работы:
+```
+=== Система управления подписками ===
+1. Создать пользователя
+2. Создать подписку
+3. Добавить подписку пользователю
+4. Отменить подписку
+5. Показать активные подписки пользователя
+6. Показать истекшие подписки пользователя
+7. Показать всех пользователей
+8. Показать все подписки
+0. Выход
+Выберите действие: 1
+Введите ID пользователя: U1
+Введите имя пользователя: Иван
+Введите email пользователя: ivan@mail.ru
+Пользователь успешно создан!
+```
+
+Интерфейс интуитивно понятен и позволяет полностью управлять системой подписок через консоль. Для реального применения можно добавить проверку ввода и обработку исключений.
