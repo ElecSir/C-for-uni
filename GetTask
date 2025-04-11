@@ -300,3 +300,23 @@ namespace SubscriptionManagementSystem
 ```
 
 Интерфейс интуитивно понятен и позволяет полностью управлять системой подписок через консоль. Для реального применения можно добавить проверку ввода и обработку исключений.
+
+
+public bool Equals(Product? other)
+    {
+        if (other == null)
+            return false;
+
+        return other.ProductID == ProductID;
+    }
+
+    public override bool Equals(object obj)
+    {
+        return Equals(obj as Product);
+    }
+
+    public override int GetHashCode()
+    {
+        return ProductID.GetHashCode();
+    }
+}
