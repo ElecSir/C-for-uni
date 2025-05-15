@@ -1,0 +1,13 @@
+C:\Users\SweetHome\source\repos\Lab2\Lab2\bin\Debug\Lab2.exe.config
+C:\Users\SweetHome\source\repos\Lab2\Lab2\bin\Debug\Lab2.exe
+C:\Users\SweetHome\source\repos\Lab2\Lab2\bin\Debug\Lab2.pdb
+C:\Users\SweetHome\source\repos\Lab2\Lab2\obj\Debug\Lab2.csproj.AssemblyReference.cache
+C:\Users\SweetHome\source\repos\Lab2\Lab2\obj\Debug\Lab2.Form1.resources
+C:\Users\SweetHome\source\repos\Lab2\Lab2\obj\Debug\Lab2.Properties.Resources.resources
+C:\Users\SweetHome\source\repos\Lab2\Lab2\obj\Debug\Lab2.csproj.GenerateResource.cache
+C:\Users\SweetHome\source\repos\Lab2\Lab2\obj\Debug\Lab2.csproj.CoreCompileInputs.cache
+C:\Users\SweetHome\source\repos\Lab2\Lab2\obj\Debug\Lab2.exe
+C:\Users\SweetHome\source\repos\Lab2\Lab2\obj\Debug\Lab2.pdb
+C:\Users\SweetHome\source\repos\Lab2\Lab2\obj\Debug\Lab2.SubscriptionForm.resources
+C:\Users\SweetHome\source\repos\Lab2\Lab2\obj\Debug\Lab2.UserForm.resources
+C:\Users\SweetHome\source\repos\Lab2\Lab2\obj\Debug\Lab2.SubscriptionRemoveForm.resources
